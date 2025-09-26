@@ -1,0 +1,427 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;            /* base, we'll override per element */
+  --background: #000;           /* black */
+  --foreground: #fff;           /* white */
+  --card: #0f0f0f;              /* 5% white feel on dark */
+  --card-foreground: #fff;
+  --ring: #fff;
+
+  /* typography helpers (4 sizes + chat meta) */
+  --h1: 100px;   /* intro super */
+  --h2: 80px;    /* homepage questions */
+  --h3: 60px;
+  --h4: 40px;
+  --body: 20px;  /* bold */
+  --chat-meta: 12px; /* helper/system text */
+}
+
+/* global text + lowercase + tight leading */
+html { color-scheme: dark; }
+body {
+  background:#000; color:#fff;
+  font-family: Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  line-height:1.05;
+  text-transform: lowercase;
+}
+
+/* default body size/weight */
+p, input, button, label { font-size: var(--body); font-weight: 700; }
+
+/* cards (no border/shadow) */
+[data-slot="card"] { background: var(--card); color: var(--card-foreground); border:none; border-radius:40px; }
+
+/* underline-only inputs */
+.zz-input { 
+  border:none; 
+  border-bottom:2px solid #fff; 
+  background:transparent; 
+  color:#fff; 
+  text-align:center; 
+  padding:16px 6px;
+  font-size: var(--body);
+  font-weight: 700;
+}
+.zz-input:focus { outline:none; }
+.zz-input::placeholder { color: rgba(255, 255, 255, 0.6); }
+
+/* date picker icon legibility */
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); opacity:.9; }
+
+/* 1) Primary CTA (circle) - functional actions only */
+.btn-80 {
+  width:80px; height:80px; border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:20px; font-weight:700; border:none; cursor:pointer;
+  transition:background .2s, color .2s;
+}
+.btn-primary {
+  background:#fff; color:#000;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background:#000; color:#fff;
+}
+.btn-primary:focus {
+  outline:none; box-shadow:inset 0 0 0 2px #000, 0 0 0 2px #fff;
+}
+
+/* 2) Secondary Choice (pill) - answer choices & navigation */
+.pill {
+  min-height:56px; padding:0 28px; border-radius:9999px;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:20px; font-weight:700; border:none; cursor:pointer;
+  transition:background .2s, color .2s;
+}
+.btn-secondary {
+  background:#000; color:#fff;
+}
+.btn-secondary:hover, .btn-secondary:focus {
+  background:#fff; color:#000;
+}
+.btn-secondary:focus {
+  outline:none; box-shadow:inset 0 0 0 2px #000, 0 0 0 2px #fff;
+}
+.pill.selected {
+  box-shadow:inset 0 0 0 2px #fff;
+}
+.pill-row {
+  display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+}
+
+/* select menu (black/white, 56px rows) */
+.zz-select-trigger { 
+  border:none; 
+  border-bottom:2px solid #fff; 
+  background:transparent; 
+  color:#fff; 
+  text-align:center; 
+  padding:16px 6px;
+  min-width:320px;
+  font-size: var(--body);
+  font-weight: 700;
+  cursor: pointer;
+}
+.zz-select-trigger:focus { outline:none; }
+
+.zz-select-content { 
+  background:#000; 
+  color:#fff; 
+  border: 2px solid #fff;
+  border-radius: 8px;
+}
+.zz-select-item { 
+  font-size:var(--body); 
+  font-weight:700; 
+  min-height:56px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+  cursor: pointer;
+  padding: 0 16px;
+}
+.zz-select-item[data-highlighted="true"] { background:#fff; color:#000; }
+
+/* full-screen journey layout: header / question / answers / actions */
+.zz-journey {
+  min-height: 100svh;      /* safe against mobile URL bar */
+  display: grid;
+  grid-template-rows: auto       /* header (home/back) */
+                       auto       /* question (fixed height below) */
+                       1fr        /* answers (expand) */
+                       120px;     /* actions/footer (fixed) */
+  align-items: start;      /* Changed from center to start */
+  justify-items: center;
+  background: #000; color: #fff;
+  padding: 16px 0;         /* Vertical padding instead of gap */
+}
+
+/* fixed-height question area (no jump) */
+.zz-qbox { 
+  height: calc(3 * 60px * 1.05);  /* H3 60px × 3 lines */
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  margin-top: 32px;        /* Mobile spacing from header */
+  width: 100%;             /* Full width for better alignment */
+}
+
+@media (min-width: 1024px) {
+  .zz-qbox {
+    margin-top: 48px;      /* Desktop spacing from header */
+  }
+}
+
+/* answers area reserve so swapping pills/date/text can't push footer */
+.zz-ibox { 
+  min-height: 180px;   /* fits 2–3 pill rows or a date field */
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+  margin-top: 32px;        /* Mobile spacing from question */
+  width: 100%;             /* Full width for better alignment */
+}
+
+@media (min-width: 1024px) {
+  .zz-ibox {
+    margin-top: 48px;      /* Desktop spacing from question */
+  }
+}
+
+/* actions row is fixed-height, centered; button NEVER moves */
+.zz-actions {
+  height: 120px; width: 100%;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* ghost buttons = text-only controls, no stroke/ring */
+.btn-ghost {
+  background:transparent; color:#fff; border:none;
+  font-size:20px; font-weight:700; padding:0; cursor:pointer;
+}
+.btn-ghost:hover { color:#fff; text-decoration:underline; }
+.btn-ghost:focus { outline:none; text-decoration:underline; } /* no ring */
+
+/* chat meta line */
+.zz-chat-meta { font-size: var(--chat-meta); font-weight:400; color:#9a9a9a; }
+
+/* Enhanced slider styling across all components */
+[data-slot="slider"] {
+  height: 6px;
+}
+
+[data-slot="slider-track"] {
+  height: 6px !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 9999px;
+}
+
+[data-slot="slider-range"] {
+  background: #ffffff !important;
+  border-radius: 9999px;
+}
+
+[data-slot="slider-thumb"] {
+  width: 24px !important;
+  height: 24px !important;
+  background: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+[data-slot="slider-thumb"]:hover {
+  background: rgba(255, 255, 255, 0.9) !important;
+}
+
+[data-slot="slider-thumb"]:focus {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+/* Mobile touch-friendly enhancements */
+@media (max-width: 768px) {
+  [data-slot="slider-thumb"] {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    outline: none;
+  }
+
+  body {
+    background: #000;
+    color: #fff;
+  }
+
+  /* Hide scrollbars but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+
+  /* Glitch animation for brand mark */
+  @keyframes glitch {
+    0%, 100% { 
+      transform: translate(0);
+      filter: hue-rotate(0deg);
+    }
+    10% { 
+      transform: translate(-2px, 2px) scale(1.02, 0.98);
+      filter: hue-rotate(90deg);
+    }
+    20% { 
+      transform: translate(-3px, 0px) scale(0.98, 1.02);
+      filter: hue-rotate(180deg);
+    }
+    30% { 
+      transform: translate(3px, -1px) scale(1.01, 0.99);
+      filter: hue-rotate(270deg);
+    }
+    40% { 
+      transform: translate(-1px, -3px) scale(0.99, 1.01);
+      filter: hue-rotate(45deg);
+    }
+    50% { 
+      transform: translate(2px, 2px) scale(1.03, 0.97);
+      filter: hue-rotate(135deg);
+    }
+    60% { 
+      transform: translate(-2px, 1px) scale(0.97, 1.03);
+      filter: hue-rotate(225deg);
+    }
+    70% { 
+      transform: translate(1px, -2px) scale(1.02, 0.98);
+      filter: hue-rotate(315deg);
+    }
+    80% { 
+      transform: translate(-3px, 0px) scale(0.98, 1.02);
+      filter: hue-rotate(60deg);
+    }
+    90% { 
+      transform: translate(2px, -1px) scale(1.01, 0.99);
+      filter: hue-rotate(120deg);
+    }
+  }
+  
+  .animate-glitch {
+    animation: glitch 0.8s ease-in-out;
+  }
+
+  /* Typewriter animation for profile results */
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  .animate-typing {
+    font-size: var(--h2);
+    font-weight: 800;
+    line-height: 1.1;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    animation: typing 1.5s steps(20, end);
+  }
+
+  /* Slide up animation for saved tips drawer */
+  @keyframes slide-up {
+    from { 
+      transform: translateY(100%); 
+      opacity: 0; 
+    }
+    to { 
+      transform: translateY(0); 
+      opacity: 1; 
+    }
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+  }
+
+  /* Fade in animation for headers */
+  @keyframes fade-in {
+    from { 
+      opacity: 0; 
+      transform: translateY(10px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+  
+  .fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--h1);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    h2 {
+      font-size: var(--h2);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    h3 {
+      font-size: var(--h3);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    h4 {
+      font-size: var(--h4);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    h5 {
+      font-size: var(--body);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    h6 {
+      font-size: var(--body);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .chat-system {
+      font-size: var(--chat-meta);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    p {
+      font-size: var(--body);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--body);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--body);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--body);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
