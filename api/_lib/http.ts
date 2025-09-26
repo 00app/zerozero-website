@@ -1,14 +1,22 @@
-export function json(data: any, status = 200) {
+export function ok(data: any, init: Partial<ResponseInit> = {}) {
   return new Response(JSON.stringify(data), {
-    status,
-    headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
+    status: 200,
+    headers: { 'content-type': 'application/json', ...(init.headers || {}) },
+    ...init,
   });
 }
 
-export function badRequest(msg: string) {
-  return json({ ok: false, error: msg }, 400);
+export function bad(msg: string, status = 400) {
+  return new Response(JSON.stringify({ error: msg }), {
+    status,
+    headers: { 'content-type': 'application/json' },
+  });
 }
 
-export function methodNotAllowed() {
-  return json({ ok: false, error: "Method not allowed" }, 405);
+export async function readJson<T = any>(req: Request): Promise<T> {
+  try {
+    return (await req.json()) as T;
+  } catch {
+    return {} as T;
+  }
 }

@@ -1,35 +1,40 @@
-import { sql } from "./_lib/db";
-import { json, badRequest, methodNotAllowed } from "./_lib/http";
+export const config = { runtime: 'nodejs' };
 
-export const config = { runtime: "edge" };
+import { getDb } from './_lib/db';
+import { ok, bad } from './_lib/http';
 
 export default async function handler(req: Request) {
-  if (req.method !== "GET") return methodNotAllowed();
-  const url = new URL(req.url);
-  const tip_id = url.searchParams.get("tip_id");
-  const city = url.searchParams.get("city");
+  const { searchParams } = new URL(req.url);
+  const city = (searchParams.get('city') || '').toLowerCase();
+  const limit = Math.min(50, Math.max(1, Number(searchParams.get('limit') || '10')));
 
-  if (tip_id) {
-    const rows = await sql`
-      select id::text, tip_id::text, partner, price, url, in_stock, eco_badges
-      from offers where tip_id = ${tip_id}
-      order by updated_at desc
-      limit 20;
-    `;
-    return json(rows);
+  const url = process.env.CODEWORDS_API_URL;
+  const key = process.env.CODEWORDS_API_KEY;
+
+  if (url && key) {
+    try {
+      const r = await fetch(`${url.replace(/\/$/, '')}/offers?city=${encodeURIComponent(city)}&limit=${limit}`, {
+        headers: { 'authorization': `Bearer ${key}` },
+        signal: AbortSignal.timeout(Number(process.env.CODEWORDS_TIMEOUT_MS || 12000))
+      });
+      if (r.ok) {
+        const data = await r.json();
+        return ok({ source: 'codewords', items: Array.isArray(data) ? data : data?.items || [] });
+      }
+    } catch {}
   }
 
-  if (city) {
+  try {
+    const sql = getDb();
     const rows = await sql`
-      select o.id::text, o.tip_id::text, o.partner, o.price, o.url, o.in_stock, o.eco_badges
-      from offers o
-      join tips t on t.id = o.tip_id
-      where t.city = ${city}
-      order by o.updated_at desc
-      limit 50;
+      select id, partner, title, url, city, category, details, image_url
+      from offers
+      where (${city} = '' or lower(city) = ${city})
+      order by created_at desc nulls last
+      limit ${limit};
     `;
-    return json(rows);
+    return ok({ source: 'neon', items: rows });
+  } catch (e: any) {
+    return bad(`DB error: ${e?.message || e}`, 500);
   }
-
-  return badRequest("Provide tip_id or city");
 }

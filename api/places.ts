@@ -1,23 +1,31 @@
-import { sql } from "./_lib/db";
-import { json, badRequest, methodNotAllowed } from "./_lib/http";
+export const config = { runtime: 'nodejs' };
 
-export const config = { runtime: "edge" };
+import { ok, bad } from './_lib/http';
 
 export default async function handler(req: Request) {
-  if (req.method !== "GET") return methodNotAllowed();
-  const url = new URL(req.url);
-  const city = url.searchParams.get("city");
-  const category = url.searchParams.get("category");
+  const { searchParams } = new URL(req.url);
+  const lat = searchParams.get('lat');
+  const lng = searchParams.get('lng');
+  const q = searchParams.get('q') || 'sustainable';
 
-  if (!city) return badRequest("Missing city");
+  const url = process.env.CODEWORDS_API_URL;
+  const key = process.env.CODEWORDS_API_KEY;
 
-  const rows = await sql`
-    select id::text, name, category, lat, lng, url, source
-    from places
-    where city = ${city} and (${category} is null or category = ${category})
-    order by updated_at desc
-    limit 100;
-  `;
+  if (!lat || !lng) return bad('Missing lat/lng');
 
-  return json(rows);
+  if (url && key) {
+    try {
+      const r = await fetch(`${url.replace(/\/$/, '')}/places?lat=${encodeURIComponent(lat)}&lng=${encodeURIComponent(lng)}&q=${encodeURIComponent(q)}`, {
+        headers: { 'authorization': `Bearer ${key}` },
+        signal: AbortSignal.timeout(Number(process.env.CODEWORDS_TIMEOUT_MS || 12000))
+      });
+      if (!r.ok) return bad(`Codewords places error: ${r.status}`, 502);
+      const data = await r.json();
+      return ok({ source: 'codewords', items: Array.isArray(data) ? data : data?.items || [] });
+    } catch (e: any) {
+      return bad(`Codewords request failed: ${e?.message || e}`, 502);
+    }
+  }
+
+  return ok({ source: 'noop', items: [] });
 }

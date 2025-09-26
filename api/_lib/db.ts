@@ -1,6 +1,11 @@
-import { neon } from "@neondatabase/serverless";
+import { neon } from '@neondatabase/serverless';
 
-const DATABASE_URL = process.env.DATABASE_URL;
-if (!DATABASE_URL) throw new Error("Missing DATABASE_URL");
+let client: ReturnType<typeof neon> | null = null;
 
-export const sql = neon(DATABASE_URL);
+export function getDb() {
+  if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL is not set');
+  }
+  if (!client) client = neon(process.env.DATABASE_URL);
+  return client;
+}
