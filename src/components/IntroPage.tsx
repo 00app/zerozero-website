@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
-import Component00BrandMark from '../imports/00BrandMark-2-28';
+// ✅ Import SVG as a React component
+import { ReactComponent as Component00BrandMark } from '../imports/00BrandMark.svg';
 
 interface IntroPageProps {
   onComplete: () => void;
