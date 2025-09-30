@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ReactComponent as BrandMark } from '@/imports/00BrandMark.svg'; // ✅ clean SVGR import
+import BrandMark from '@/imports/00BrandMark.svg?react'; // ✅ fixed SVGR import
 
 interface IntroPageProps {
   onComplete: () => void;
