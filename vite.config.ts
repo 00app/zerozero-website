@@ -6,11 +6,12 @@ import path from 'path';
 export default defineConfig({
   plugins: [
     react(),
-    svgr(), // ✅ enables importing SVGs as React components
+    svgr(), // ✅ SVGs as React components
   ],
   resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
-      '@': path.resolve(__dirname, './src'), // ✅ shorthand for /src
+      '@': path.resolve(__dirname, './src'),
     },
   },
   build: {
@@ -22,4 +23,3 @@ export default defineConfig({
     open: true,
   },
 });
-
