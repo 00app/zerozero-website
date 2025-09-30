@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ReactComponent as BrandMark } from '../imports/00BrandMark.svg'; // ✅ SVGR import
+import { ReactComponent as BrandMark } from '@/imports/00BrandMark.svg'; // ✅ clean SVGR import
 
 interface IntroPageProps {
   onComplete: () => void;
@@ -77,7 +77,7 @@ export function IntroPage({ onComplete }: IntroPageProps) {
 
       {stage === 'brand' && (
         <div className="opacity-100 transition-opacity duration-1000">
-          <BrandMark className="w-[300px] h-auto invert" /> {/* ✅ simpler */}
+          <BrandMark className="w-[300px] h-auto invert" />
         </div>
       )}
 
