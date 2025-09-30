@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as SliderPrimitive from "@radix-ui/react-slider@1.2.3";
+import * as SliderPrimitive from "@radix-ui/react-slider";
 
 import { cn } from "./utils";
 
@@ -42,7 +42,7 @@ function Slider({
           "relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5",
         )}
         style={{
-          background: 'rgba(255, 255, 255, 0.2)'
+          background: "rgba(255, 255, 255, 0.2)",
         }}
       >
         <SliderPrimitive.Range
@@ -51,7 +51,7 @@ function Slider({
             "absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full rounded-full",
           )}
           style={{
-            background: '#ffffff'
+            background: "#ffffff",
           }}
         />
       </SliderPrimitive.Track>
@@ -61,22 +61,12 @@ function Slider({
           key={index}
           className="block shrink-0 rounded-full border-2 transition-all duration-200 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
           style={{
-            width: '24px',
-            height: '24px',
-            background: '#ffffff',
-            borderColor: '#ffffff',
-            cursor: 'pointer'
+            width: "24px",
+            height: "24px",
+            background: "#ffffff",
+            borderColor: "#ffffff",
+            cursor: "pointer",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = '#ffffff';
-          }}
-        />
-      ))}
-    </SliderPrimitive.Root>
-  );
-}
 
-export { Slider };
+            
