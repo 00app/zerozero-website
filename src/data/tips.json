@@ -1,0 +1,290 @@
+[
+  {
+    "id": "t-tr-1",
+    "category": "travel",
+    "text": "walk or cycle trips under 1 mile",
+    "impact": "save ~0.3 kg CO₂/day",
+    "href": "https://www.sustrans.org.uk",
+    "type": "learn"
+  },
+  {
+    "id": "t-tr-2",
+    "category": "travel",
+    "text": "try a weekly public transport day",
+    "impact": "save ~1.1 kg CO₂/day",
+    "href": "https://tfl.gov.uk",
+    "type": "learn"
+  },
+  {
+    "id": "t-tr-3",
+    "category": "travel",
+    "text": "car share on your longest commute",
+    "impact": "halve trip emissions",
+    "href": "https://liftshare.com",
+    "type": "offer"
+  },
+  {
+    "id": "t-tr-4",
+    "category": "travel",
+    "text": "plan journeys with trainline or rome2rio",
+    "impact": "find greenest routes",
+    "href": "https://www.thetrainline.com",
+    "type": "offer"
+  },
+  {
+    "id": "t-sw-1",
+    "category": "switch",
+    "text": "switch to a 100% renewable tariff",
+    "impact": "lower grid emissions",
+    "href": "https://octopus.energy",
+    "type": "offer"
+  },
+  {
+    "id": "t-sw-2",
+    "category": "switch",
+    "text": "fit LED bulbs in high-use rooms",
+    "impact": "save ~£5/month",
+    "href": "https://www.which.co.uk/reviews/light-bulbs",
+    "type": "learn"
+  },
+  {
+    "id": "t-sw-3",
+    "category": "switch",
+    "text": "compare tariffs with uswitch",
+    "impact": "find cheapest green deal",
+    "href": "https://www.uswitch.com/gas-electricity/",
+    "type": "offer"
+  },
+  {
+    "id": "t-sw-4",
+    "category": "switch",
+    "text": "get a smart meter installed free",
+    "impact": "track usage in real-time",
+    "href": "https://www.smartenergygb.org",
+    "type": "offer"
+  },
+  {
+    "id": "t-fo-1",
+    "category": "food",
+    "text": "swap red meat 3 meals/week for beans or tofu",
+    "impact": "save ~3–6 kg CO₂/week",
+    "href": "https://www.bda.uk.com",
+    "type": "learn"
+  },
+  {
+    "id": "t-fo-2",
+    "category": "food",
+    "text": "plan portions to cut food waste",
+    "impact": "save ~£30/month",
+    "href": "https://www.lovefoodhatewaste.com",
+    "type": "learn"
+  },
+  {
+    "id": "t-fo-3",
+    "category": "food",
+    "text": "try too good to go for surplus meals",
+    "impact": "£4/meal + reduce waste",
+    "href": "https://www.toogoodtogo.com",
+    "type": "offer"
+  },
+  {
+    "id": "t-fo-4",
+    "category": "food",
+    "text": "get a vegbox from local farms",
+    "impact": "seasonal + lower miles",
+    "href": "https://www.riverford.co.uk",
+    "type": "product"
+  },
+  {
+    "id": "t-ho-1",
+    "category": "home",
+    "text": "draught-proof doors and windows",
+    "impact": "save ~£8/month",
+    "href": "https://energysavingtrust.org.uk",
+    "type": "learn"
+  },
+  {
+    "id": "t-ho-2",
+    "category": "home",
+    "text": "switch devices fully off at night",
+    "impact": "save ~0.2 kg/day",
+    "href": "https://energysavingtrust.org.uk",
+    "type": "learn"
+  },
+  {
+    "id": "t-ho-3",
+    "category": "home",
+    "text": "install a smart thermostat",
+    "impact": "save £120/year",
+    "href": "https://nest.com",
+    "type": "product"
+  },
+  {
+    "id": "t-ho-4",
+    "category": "home",
+    "text": "upgrade loft insulation",
+    "impact": "save 400kg CO₂/year",
+    "href": "https://www.gov.uk/improve-energy-efficiency",
+    "type": "learn"
+  },
+  {
+    "id": "t-sh-1",
+    "category": "shop",
+    "text": "buy refurbished tech with warranty",
+    "impact": "cut embodied CO₂",
+    "href": "https://backmarket.co.uk",
+    "type": "product"
+  },
+  {
+    "id": "t-sh-2",
+    "category": "shop",
+    "text": "choose quality over quantity",
+    "impact": "longer-lasting items",
+    "href": "https://goodonyou.eco",
+    "type": "learn"
+  },
+  {
+    "id": "t-sh-3",
+    "category": "shop",
+    "text": "try vinted for second-hand clothes",
+    "impact": "affordable + circular",
+    "href": "https://www.vinted.co.uk",
+    "type": "offer"
+  },
+  {
+    "id": "t-sh-4",
+    "category": "shop",
+    "text": "check ethical ratings before buying",
+    "impact": "support better brands",
+    "href": "https://directory.goodonyou.eco",
+    "type": "learn"
+  },
+  {
+    "id": "t-wa-1",
+    "category": "waste",
+    "text": "add a food caddy to compost",
+    "impact": "reduce methane",
+    "href": "https://wrap.org.uk",
+    "type": "learn"
+  },
+  {
+    "id": "t-wa-2",
+    "category": "waste",
+    "text": "recycle clean, dry plastics",
+    "impact": "higher diversion",
+    "href": "https://recyclenow.com",
+    "type": "learn"
+  },
+  {
+    "id": "t-wa-3",
+    "category": "waste",
+    "text": "share surplus food on olio",
+    "impact": "free + prevents waste",
+    "href": "https://olioex.com",
+    "type": "offer"
+  },
+  {
+    "id": "t-wa-4",
+    "category": "waste",
+    "text": "get a home compost bin",
+    "impact": "lowest food waste footprint",
+    "href": "https://www.rhs.org.uk/garden-jobs/compost",
+    "type": "product"
+  },
+  {
+    "id": "t-hl-1",
+    "category": "holiday",
+    "text": "prefer train for trips <800km",
+    "impact": "cut 70–90% CO₂",
+    "href": "https://www.seat61.com",
+    "type": "learn"
+  },
+  {
+    "id": "t-hl-2",
+    "category": "holiday",
+    "text": "stay in efficient, local lodgings",
+    "impact": "support local",
+    "href": "https://www.ecobnb.com",
+    "type": "learn"
+  },
+  {
+    "id": "t-hl-3",
+    "category": "holiday",
+    "text": "try camping close to home",
+    "impact": "low cost + low carbon",
+    "href": "https://www.coolcamping.com",
+    "type": "offer"
+  },
+  {
+    "id": "t-hl-4",
+    "category": "holiday",
+    "text": "offset unavoidable flights",
+    "impact": "fund verified projects",
+    "href": "https://www.climatecare.org",
+    "type": "offer"
+  },
+  {
+    "id": "t-mo-1",
+    "category": "money",
+    "text": "switch to a greener bank",
+    "impact": "lower financed CO₂",
+    "href": "https://www.triodos.co.uk",
+    "type": "offer"
+  },
+  {
+    "id": "t-mo-2",
+    "category": "money",
+    "text": "automate a weekly 'no-spend' day",
+    "impact": "save ~£20/week",
+    "href": "https://www.moneysavingexpert.com",
+    "type": "learn"
+  },
+  {
+    "id": "t-mo-3",
+    "category": "money",
+    "text": "use budgeting tools from moneyhelper",
+    "impact": "save £400/year",
+    "href": "https://www.moneyhelper.org.uk",
+    "type": "learn"
+  },
+  {
+    "id": "t-mo-4",
+    "category": "money",
+    "text": "check if you're on the best energy deal",
+    "impact": "save £240/year",
+    "href": "https://www.moneysavingexpert.com/utilities/",
+    "type": "offer"
+  },
+  {
+    "id": "t-he-1",
+    "category": "health",
+    "text": "walk 20 minutes daily",
+    "impact": "+mood, −CO₂",
+    "href": "https://www.nhs.uk/live-well/exercise",
+    "type": "learn"
+  },
+  {
+    "id": "t-he-2",
+    "category": "health",
+    "text": "plant-forward lunches",
+    "impact": "lower footprint",
+    "href": "https://www.nhs.uk/live-well/eat-well",
+    "type": "learn"
+  },
+  {
+    "id": "t-he-3",
+    "category": "health",
+    "text": "try a digital detox",
+    "impact": "better sleep + less energy",
+    "href": "https://www.bbc.co.uk/programmes/articles/1KL6WTx8vJ6MvD4nfqlXMWQ/ten-tips-for-a-digital-detox",
+    "type": "learn"
+  },
+  {
+    "id": "t-he-4",
+    "category": "health",
+    "text": "explore veganuary this january",
+    "impact": "save 500kg CO₂/year",
+    "href": "https://www.veganuary.com",
+    "type": "offer"
+  }
+]

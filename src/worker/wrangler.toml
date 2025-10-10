@@ -1,0 +1,25 @@
+# Cloudflare Worker Configuration for Zero Zero MVP
+
+name = "zerozero-api"
+main = "index.js"
+compatibility_date = "2025-01-10"
+
+# Worker settings
+workers_dev = true
+
+# Environment variables (non-secret)
+[vars]
+# Add non-sensitive config here
+
+# Production environment
+[env.production]
+# Production-specific settings
+
+# Secrets (set via: wrangler secret put SECRET_NAME)
+# HF_API_KEY - Hugging Face API key for AI chat
+# HF_API_URL - Hugging Face model URL (optional)
+
+# Routes (uncomment when you have a custom domain)
+# [[routes]]
+# pattern = "api.zerozero.app/*"
+# zone_name = "zerozero.app"

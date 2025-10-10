@@ -1,0 +1,8 @@
+node_modules/
+.env
+.vercel/
+dist/
+build/
+worker/wrangler.toml
+.DS_Store
+
